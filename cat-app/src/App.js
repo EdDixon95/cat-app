@@ -8,6 +8,7 @@ function App() {
   const [answer, setAnswer] = useState("");
   const [correct, setCorrect] = useState(false);
   const [incorrect, setIncorrect] = useState(false);
+  const [streak, setStreak] = useState(0);
 
   const handleAnswerInputChange = (event) => {
     event.persist();
@@ -37,9 +38,11 @@ function App() {
     if (answer == name) {
       setCorrect(true);
       console.log("CORRECT");
+      setStreak(streak + 1);
     } else {
       setIncorrect(true);
       console.log("INCORRECT");
+      setStreak(0);
     }
   };
 
@@ -47,6 +50,7 @@ function App() {
     <div className="App">
       <div className="Container">
         <img src={image} />
+        <h2>Streak: {streak}</h2>
         <form onSubmit={checkAnswer}>
           <input
             id="answer"

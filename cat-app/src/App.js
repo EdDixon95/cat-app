@@ -15,11 +15,7 @@ function App() {
     setAnswer(event.target.value);
   };
 
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
-  useEffect(() => {
+  const getCatInfo = () =>
     fetch("https://api.thecatapi.com/v1/breeds", {
       headers: {
         "x-api-key": "b1b05aad-1944-40d4-a209-25ce8cbc43a3",
@@ -30,17 +26,23 @@ function App() {
         let currentCat = Math.floor(Math.random() * 67);
         setName(res[currentCat].name);
         setImage(res[currentCat].image.url);
+        setCorrect(false);
       });
+
+  useEffect(() => {
+    getCatInfo();
   }, []);
 
   const checkAnswer = (event) => {
     event.preventDefault();
     if (answer == name) {
       setCorrect(true);
+      setIncorrect(false);
       console.log("CORRECT");
       setStreak(streak + 1);
     } else {
       setIncorrect(true);
+      setCorrect(false);
       console.log("INCORRECT");
       setStreak(0);
     }
@@ -62,19 +64,21 @@ function App() {
             onChange={handleAnswerInputChange}
           />
           <br />
-          <button className="form-field" type="submit">
-            Go!
-          </button>
+          {correct !== true && (
+            <button className="form-field" type="submit">
+              Go!
+            </button>
+          )}
           <br />
           {incorrect && <p>Not Quite, try again!</p>}
           {correct && <p>Correct, well done!</p>}
           <br />
-          {correct && (
-            <button className="btn" onClick={refreshPage}>
-              Play again!
-            </button>
-          )}
         </form>
+        {correct && (
+          <button className="btn" onClick={getCatInfo}>
+            Play again!
+          </button>
+        )}
       </div>
     </div>
   );

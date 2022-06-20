@@ -1,12 +1,12 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [answer, setAnswer] = useState("");
-  const [correct, setCorrect] = useState(true);
+  const [correct, setCorrect] = useState(false);
   const [incorrect, setIncorrect] = useState(false);
 
   const handleAnswerInputChange = (event) => {
@@ -62,8 +62,8 @@ function App() {
             Go!
           </button>
           <br />
-          {incorrect && <a>Not Quite, try again!</a>}
-          {correct && <a>Correct, well done!</a>}
+          {incorrect && <p>Not Quite, try again!</p>}
+          {correct && <p>Correct, well done!</p>}
           <br />
           {correct && (
             <button className="btn" onClick={refreshPage}>

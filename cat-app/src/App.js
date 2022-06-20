@@ -41,24 +41,29 @@ function App() {
 
   return (
     <div className="App">
-      <img src={image} width="50%" />
-      <form onSubmit={checkAnswer}>
-        <input
-          id="answer"
-          className="form-field"
-          type="text"
-          placeholder="What's that cat?"
-          name="answer"
-          value={answer}
-          onChange={handleAnswerInputChange}
-        />
-        <button className="form-field" type="submit">
-          Go!
-        </button>
-        {incorrect && <a>Not Quite, try again!</a>}
-        {correct && <a>Correct, well done!</a>}
-        {correct && <button className="btn">Play again!</button>}
-      </form>
+      <div className="Container">
+        <img src={image} />
+        <form onSubmit={checkAnswer}>
+          <input
+            id="answer"
+            className="form-field"
+            type="text"
+            placeholder="What's that cat?"
+            name="answer"
+            value={answer}
+            onChange={handleAnswerInputChange}
+          />
+          <br />
+          <button className="form-field" type="submit">
+            Go!
+          </button>
+          <br />
+          {incorrect && <a>Not Quite, try again!</a>}
+          {correct && <a>Correct, well done!</a>}
+          <br />
+          {correct && <button className="btn">Play again!</button>}
+        </form>
+      </div>
     </div>
   );
 }

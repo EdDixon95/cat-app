@@ -35,7 +35,7 @@ function App() {
 
   const checkAnswer = (event) => {
     event.preventDefault();
-    if (answer == name) {
+    if (answer.toLowerCase() == name.toLowerCase()) {
       setCorrect(true);
       setIncorrect(false);
       console.log("CORRECT");

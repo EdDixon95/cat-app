@@ -6,12 +6,16 @@ function App() {
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [answer, setAnswer] = useState("");
-  const [correct, setCorrect] = useState(false);
+  const [correct, setCorrect] = useState(true);
   const [incorrect, setIncorrect] = useState(false);
 
   const handleAnswerInputChange = (event) => {
     event.persist();
     setAnswer(event.target.value);
+  };
+
+  const refreshPage = () => {
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -61,7 +65,11 @@ function App() {
           {incorrect && <a>Not Quite, try again!</a>}
           {correct && <a>Correct, well done!</a>}
           <br />
-          {correct && <button className="btn">Play again!</button>}
+          {correct && (
+            <button className="btn" onClick={refreshPage}>
+              Play again!
+            </button>
+          )}
         </form>
       </div>
     </div>

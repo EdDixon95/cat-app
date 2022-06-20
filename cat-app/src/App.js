@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./App.css";
+import spinner from "./spinner.gif";
 
 function App() {
   const [name, setName] = useState("");
@@ -9,13 +10,15 @@ function App() {
   const [correct, setCorrect] = useState(false);
   const [incorrect, setIncorrect] = useState(false);
   const [streak, setStreak] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleAnswerInputChange = (event) => {
     event.persist();
     setAnswer(event.target.value);
   };
 
-  const getCatInfo = () =>
+  const getCatInfo = () => {
+    setLoading(true);
     fetch("https://api.thecatapi.com/v1/breeds", {
       headers: {
         "x-api-key": "b1b05aad-1944-40d4-a209-25ce8cbc43a3",
@@ -27,7 +30,9 @@ function App() {
         setName(res[currentCat].name);
         setImage(res[currentCat].image.url);
         setCorrect(false);
+        setLoading(false);
       });
+  };
 
   useEffect(() => {
     getCatInfo();
@@ -51,7 +56,12 @@ function App() {
   return (
     <div className="App">
       <div className="Container">
-        <img src={image} />
+        {loading && (
+          <p>
+            <img className="Loader" src={spinner} />
+          </p>
+        )}
+        <img className="CatImage" src={image} />
         <h2>Streak: {streak}</h2>
         <form onSubmit={checkAnswer}>
           <input
@@ -70,7 +80,7 @@ function App() {
             </button>
           )}
           <br />
-          {incorrect && <p>Not Quite, try again!</p>}
+          {incorrect && <p>Not quite, try again!</p>}
           {correct && <p>Correct, well done!</p>}
           <br />
         </form>

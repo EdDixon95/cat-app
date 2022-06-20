@@ -5,10 +5,14 @@ form {
   display: block;
 }
 
-img {
+img.CatImage {
   width: 50%;
   border-radius: 10px;
   margin: 10px;
+}
+
+img.Loader {
+  width: 20%;
 }
 
 button {
